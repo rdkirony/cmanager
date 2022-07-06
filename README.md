@@ -1,2 +1,2 @@
 # cmanager
-Projeto TCC para gerenciamento de aulas
+Projeto TCC para Gerenciamento de aulas
