@@ -1,9 +1,9 @@
 package com.br.cmanager.controller
 
-import com.br.cmanager.dto.pessoa.PessoaCadastroDto
-import com.br.cmanager.dto.pessoa.PessoaUpdateDto
-import com.br.cmanager.dto.pessoa.PessoaDto
-import com.br.cmanager.service.PessoaService
+import com.br.cmanager.dto.perfil.PerfilCadastroDto
+import com.br.cmanager.dto.perfil.PerfilDto
+import com.br.cmanager.dto.perfil.PerfilUpdateDto
+import com.br.cmanager.service.PerfilService
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.data.domain.Sort
@@ -25,29 +25,28 @@ import org.springframework.web.util.UriComponentsBuilder
 import javax.validation.Valid
 
 @RestController
-@RequestMapping("/pessoas")
-class PessoaController(private val service: PessoaService) {
-
+@RequestMapping("/perfis")
+class PerfilController(var service: PerfilService) {
 
     @GetMapping
     fun listar(
         @RequestParam(required = false) nome: String?,
         @PageableDefault(size = 10, sort = ["nome"], direction = Sort.Direction.ASC)  paginacao: Pageable
-    ): Page<PessoaDto> {
+    ): Page<PerfilDto> {
         return service.listar(nome, paginacao)
     }
 
     @GetMapping("/{id}")
-    fun buscarPorId(@PathVariable id: Long): PessoaDto {
+    fun buscarPorId(@PathVariable id: Long): PerfilDto {
         return service.buscarPorId(id)
     }
 
     @PostMapping
     @Transactional
     fun cadastrar(
-        @RequestBody @Valid pessoaCadastroDto: PessoaCadastroDto,
+        @RequestBody @Valid pessoaCadastroDto: PerfilCadastroDto,
         uriBuilder: UriComponentsBuilder
-    ): ResponseEntity<PessoaDto> {
+    ): ResponseEntity<PerfilDto> {
         val pessoaDTO = service.cadastrar(pessoaCadastroDto)
         val uri = uriBuilder.path("/pessoas/${pessoaDTO.id}").build().toUri()
         return ResponseEntity.created(uri).body(pessoaDTO)
@@ -55,7 +54,7 @@ class PessoaController(private val service: PessoaService) {
 
     @PutMapping
     @Transactional
-    fun atualizar(@RequestBody @Valid pessoaAtualizarDTO: PessoaUpdateDto): ResponseEntity<PessoaDto> {
+    fun atualizar(@RequestBody @Valid pessoaAtualizarDTO: PerfilUpdateDto): ResponseEntity<PerfilDto> {
         val pessoaDTO = service.atualizar(pessoaAtualizarDTO)
         return ResponseEntity.ok(pessoaDTO)
     }

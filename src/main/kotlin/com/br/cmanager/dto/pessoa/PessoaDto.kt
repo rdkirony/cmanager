@@ -1,4 +1,4 @@
-package com.br.cmanager.dto
+package com.br.cmanager.dto.pessoa
 
 data class PessoaDto(
     val id: Long?=null,

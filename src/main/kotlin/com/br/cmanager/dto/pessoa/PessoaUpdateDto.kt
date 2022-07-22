@@ -1,4 +1,4 @@
-package com.br.cmanager.dto
+package com.br.cmanager.dto.pessoa
 
 import lombok.AllArgsConstructor
 import lombok.Builder
@@ -13,7 +13,7 @@ data class PessoaUpdateDto (
     @field:NotNull
     val id: Long,
     @field:NotEmpty(message = "Nome não pode ser em branco")
-    @field:Size(min = 2, max = 255, message = "Nome deve ter entre 2 e 255 caracteres")
+    @field:Size(min = 2, max = 30, message = "Nome deve ter entre 2 e 30 caracteres")
     val nome: String,
     val cpf: String,
     val email: String,

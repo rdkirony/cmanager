@@ -24,6 +24,19 @@ class ExceptionHandler {
                 path = request.servletPath
         )
     }
+    @ExceptionHandler(InvalidEmailException::class)
+    @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
+    fun handleInvalidEmail(
+        exception: InvalidEmailException,
+        request: HttpServletRequest
+    ): ErrorView {
+        return ErrorView(
+            status = HttpStatus.UNPROCESSABLE_ENTITY.value(),
+            error = HttpStatus.UNPROCESSABLE_ENTITY.name,
+            message = exception.message,
+            path = request.servletPath
+        )
+    }
 
     @ExceptionHandler(MethodArgumentNotValidException::class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)

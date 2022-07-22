@@ -1,8 +1,8 @@
 package com.br.cmanager.transformers
 
-import com.br.cmanager.dto.PessoaCadastroDto
-import com.br.cmanager.dto.PessoaDto
-import com.br.cmanager.dto.PessoaUpdateDto
+import com.br.cmanager.dto.pessoa.PessoaCadastroDto
+import com.br.cmanager.dto.pessoa.PessoaDto
+import com.br.cmanager.dto.pessoa.PessoaUpdateDto
 import com.br.cmanager.entity.Pessoa
 import org.springframework.stereotype.Component
 

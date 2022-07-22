@@ -1,7 +1,7 @@
 create table Pessoa(
     id serial,
-    nome VARCHAR(255) NOT NULL,
-    cpf VARCHAR(255),
-    email VARCHAR(255),
-    endereco VARCHAR(255)
+    nome VARCHAR(30) NOT NULL,
+    cpf VARCHAR(20),
+    email VARCHAR(50),
+    endereco VARCHAR(50)
 )
