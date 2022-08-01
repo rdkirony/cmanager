@@ -1,9 +1,9 @@
 package com.br.cmanager.controller
 
-import com.br.cmanager.dto.perfil.PerfilCadastroDto
-import com.br.cmanager.dto.perfil.PerfilDto
-import com.br.cmanager.dto.perfil.PerfilUpdateDto
-import com.br.cmanager.service.PerfilService
+import com.br.cmanager.dto.usuario.UsuarioCadastroDto
+import com.br.cmanager.dto.usuario.UsuarioDto
+import com.br.cmanager.dto.usuario.UsuarioUpdateDto
+import com.br.cmanager.service.UsuarioService
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.data.domain.Sort
@@ -25,38 +25,38 @@ import org.springframework.web.util.UriComponentsBuilder
 import javax.validation.Valid
 
 @RestController
-@RequestMapping("/perfis")
-class PerfilController(var service: PerfilService) {
+@RequestMapping("/usuarios")
+class UsuarioController(private val service: UsuarioService) {
 
     @GetMapping
     fun listar(
-        @RequestParam(required = false) nome: String?,
-        @PageableDefault(size = 10, sort = ["nome"], direction = Sort.Direction.ASC)  paginacao: Pageable
-    ): Page<PerfilDto> {
-        return service.listar(nome, paginacao)
+        @RequestParam(required = false) login: String?,
+        @PageableDefault(size = 10, sort = ["login"], direction = Sort.Direction.ASC)  paginacao: Pageable
+    ): Page<UsuarioDto> {
+        return service.listar(login, paginacao)
     }
 
     @GetMapping("/{id}")
-    fun buscarPorId(@PathVariable id: Long): PerfilDto {
+    fun buscarPorId(@PathVariable id: Long): UsuarioDto {
         return service.buscarPorId(id)
     }
 
     @PostMapping
     @Transactional
     fun cadastrar(
-        @RequestBody @Valid pessoaCadastroDto: PerfilCadastroDto,
+        @RequestBody @Valid usuarioCadastroDto: UsuarioCadastroDto,
         uriBuilder: UriComponentsBuilder
-    ): ResponseEntity<PerfilDto> {
-        val pessoaDTO = service.cadastrar(pessoaCadastroDto)
-        val uri = uriBuilder.path("/perfis/${pessoaDTO.id}").build().toUri()
-        return ResponseEntity.created(uri).body(pessoaDTO)
+    ): ResponseEntity<UsuarioDto> {
+        val usuarioDto = service.cadastrar(usuarioCadastroDto)
+        val uri = uriBuilder.path("/usuarios/${usuarioDto.id}").build().toUri()
+        return ResponseEntity.created(uri).body(usuarioDto)
     }
 
     @PutMapping
     @Transactional
-    fun atualizar(@RequestBody @Valid pessoaAtualizarDTO: PerfilUpdateDto): ResponseEntity<PerfilDto> {
-        val pessoaDTO = service.atualizar(pessoaAtualizarDTO)
-        return ResponseEntity.ok(pessoaDTO)
+    fun atualizar(@RequestBody @Valid usuarioUpdateDto: UsuarioUpdateDto): ResponseEntity<UsuarioDto> {
+        val usuarioDto = service.atualizar(usuarioUpdateDto)
+        return ResponseEntity.ok(usuarioDto)
     }
 
     @DeleteMapping("/{id}")
@@ -65,5 +65,4 @@ class PerfilController(var service: PerfilService) {
     fun deletar(@PathVariable id: Long) {
         service.deletar(id)
     }
-
 }

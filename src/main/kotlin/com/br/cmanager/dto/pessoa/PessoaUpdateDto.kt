@@ -10,7 +10,7 @@ import javax.validation.constraints.Size
 
 
 data class PessoaUpdateDto (
-    @field:NotNull
+    @field:NotNull(message = "Id necessário para atualização")
     val id: Long,
     @field:NotEmpty(message = "Nome não pode ser em branco")
     @field:Size(min = 2, max = 30, message = "Nome deve ter entre 2 e 30 caracteres")
