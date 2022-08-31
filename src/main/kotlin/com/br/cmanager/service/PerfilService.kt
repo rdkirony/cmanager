@@ -4,6 +4,7 @@ import com.br.cmanager.dto.perfil.PerfilCadastroDto
 import com.br.cmanager.dto.perfil.PerfilDto
 import com.br.cmanager.dto.perfil.PerfilUpdateDto
 import com.br.cmanager.entity.Perfil
+import com.br.cmanager.entity.Usuario
 import com.br.cmanager.exception.NotFoundException
 import com.br.cmanager.repository.PerfilRepository
 import com.br.cmanager.transformers.PerfilTransformer
@@ -47,5 +48,9 @@ class PerfilService(
 
     fun deletar(id: Long) {
         repository.deleteById(id);
+    }
+    fun buscarPorIdRetornandoPerfil(id: Long):Perfil{
+        return repository.findById(id).orElseThrow{ NotFoundException("Perfil não encontrado") }
+
     }
 }

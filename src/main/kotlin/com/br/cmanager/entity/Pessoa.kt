@@ -15,13 +15,13 @@ data class Pessoa (
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,
     @field:Column(nullable = false, name = "nome")
-    var nome: String,
+    var nome: String = "",
     @Column(name = "cpf")
-    var cpf: String,
+    var cpf: String = "",
     @Column(name = "email")
-    var email: String,
+    var email: String = "",
     @Column(name = "endereco")
-    var endereco: String
+    var endereco: String = ""
 
 
 )

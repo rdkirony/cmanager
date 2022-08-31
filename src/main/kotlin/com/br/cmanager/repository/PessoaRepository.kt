@@ -8,5 +8,6 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface PessoaRepository: JpaRepository<Pessoa,Long> {
-    fun findByNome(nome: String, paginacao: Pageable): Page<Pessoa>
+    fun findByNomeLikeIgnoreCaseAndCpfLikeIgnoreCaseAndEmailLikeIgnoreCaseAndEnderecoLikeIgnoreCase(nome: String, cpf:String, email:String, endereco:String, paginacao: Pageable): Page<Pessoa>
+
 }

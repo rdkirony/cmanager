@@ -13,6 +13,6 @@ data class UsuarioCadastroDto(
     @field:Size(min = 3, max = 30, message = "Login deve ter entre 3 e 30 caracteres")
     val login:String,
     @field:NotEmpty(message = "Senha não pode ser em branco")
-    @field:Size(min = 5, max = 50, message = "Senha deve ter entre 5 e 50 caracteres")
+    @field:Size(min = 5, max = 120, message = "Senha deve ter entre 5 e 50 caracteres")
     val senha:String
 )

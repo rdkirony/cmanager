@@ -18,9 +18,9 @@ class PerfilTransformer {
     }
 
     fun perfilCadastroToPerfilDto(t: PerfilCadastroDto): Perfil {
-        return Perfil(
-            nome = t.nome,
-            descricao = t.descricao
-        )
+        val perfil = Perfil()
+        perfil.nome = t.nome
+        perfil.descricao = t.descricao
+        return perfil
     }
 }

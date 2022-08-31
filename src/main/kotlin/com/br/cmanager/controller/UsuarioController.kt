@@ -2,7 +2,7 @@ package com.br.cmanager.controller
 
 import com.br.cmanager.dto.usuario.UsuarioCadastroDto
 import com.br.cmanager.dto.usuario.UsuarioDto
-import com.br.cmanager.dto.usuario.UsuarioUpdateDto
+import com.br.cmanager.dto.usuario.UsuarioUpdateSenhaDto
 import com.br.cmanager.service.UsuarioService
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.util.UriComponentsBuilder
+import javax.servlet.http.HttpServletRequest
 import javax.validation.Valid
 
 @RestController
@@ -54,7 +55,7 @@ class UsuarioController(private val service: UsuarioService) {
 
     @PutMapping
     @Transactional
-    fun atualizar(@RequestBody @Valid usuarioUpdateDto: UsuarioUpdateDto): ResponseEntity<UsuarioDto> {
+    fun atualizarSenha(@RequestBody @Valid usuarioUpdateDto: UsuarioUpdateSenhaDto): ResponseEntity<UsuarioDto> {
         val usuarioDto = service.atualizar(usuarioUpdateDto)
         return ResponseEntity.ok(usuarioDto)
     }
@@ -65,4 +66,9 @@ class UsuarioController(private val service: UsuarioService) {
     fun deletar(@PathVariable id: Long) {
         service.deletar(id)
     }
+    @GetMapping("/token")
+    fun buscarPorToken(request: HttpServletRequest): UsuarioDto {
+        return service.buscarPorToken(request)
+    }
+
 }

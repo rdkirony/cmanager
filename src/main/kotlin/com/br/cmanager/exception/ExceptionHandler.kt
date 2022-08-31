@@ -24,6 +24,20 @@ class ExceptionHandler {
                 path = request.servletPath
         )
     }
+    @ExceptionHandler(InvalidLoginException::class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    fun handleInvalidLogin(
+        exception: InvalidLoginException,
+        request: HttpServletRequest
+    ): ErrorView {
+        return ErrorView(
+            status = HttpStatus.UNAUTHORIZED.value(),
+            error = HttpStatus.UNAUTHORIZED.name,
+            message = exception.message,
+            path = request.servletPath
+        )
+    }
+
     @ExceptionHandler(InvalidEmailException::class)
     @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
     fun handleInvalidEmail(

@@ -1,7 +1,7 @@
 create table Usuario(
     id serial,
     login varchar(30) NOT NULL ,
-    senha varchar(50) NOT NULL,
+    senha varchar(120) NOT NULL,
     pessoa_id int,
     perfil_id int,
     CONSTRAINT fk_pessoa FOREIGN KEY (pessoa_id) references pessoa(id),

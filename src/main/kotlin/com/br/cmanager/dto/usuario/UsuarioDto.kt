@@ -7,6 +7,5 @@ data class UsuarioDto(
     val id: Long?=null,
     val pessoaDto: PessoaDto,
     val perfilDto:PerfilDto,
-    val login:String,
-    val senha:String
+    val login:String
 )
