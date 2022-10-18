@@ -27,8 +27,8 @@ class AutenticacaoController(
         val usuarioLogin = usuarioService.validarUsuarioParaAutenticacao(form)
         return try {
             if(usuarioLogin != null) {
-                val token: String = tokenService.gerarToken(usuarioLogin)
-                ResponseEntity.ok(TokenDto(token, "Bearer"))
+                val token: String = tokenService.gerarToken(usuarioLogin.id!!)
+                ResponseEntity.ok(TokenDto(token, "Bearer", usuarioLogin.perfil.id!!))
             }else {
                 throw InvalidLoginException("Dados inválidos")
             }

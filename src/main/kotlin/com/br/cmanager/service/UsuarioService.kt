@@ -61,11 +61,11 @@ class UsuarioService(
         return passwordEncoder.matches(senhaInserida,senhaUsuario)
     }
 
-    fun validarUsuarioParaAutenticacao(loginDto:LoginDto): Long? {
+    fun validarUsuarioParaAutenticacao(loginDto:LoginDto): Usuario? {
         val usuario = this.buscarPorLogin(loginDto.login)
         if(usuario.isPresent) {
             if (this.validarSenhas(loginDto.senha, usuario.get().senha)) {
-                return usuario.get().id
+                return usuario.get()
             }
         }
         return null
